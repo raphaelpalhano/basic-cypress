@@ -37,6 +37,46 @@ describe('Wrap...', () => {
 
     })
 
-    
+    it('Using Its', () => {
+        const object = {nome: 'Juca Moreno', idade: 22}
+        cy.wrap(object).should('have.a.property', 'nome', 'Juca Moreno')
+        
+        // its == para acessar o valor diretamente sem passar pela propriedade
+        cy.wrap(object).its('nome').should('be.equal' ,'Juca Moreno')
+
+        // encadeamento 
+        const object2 = {nomes: {um: 'Joao', dois: 'Maria', tres: "Ana"}}
+        cy.wrap(object2).its('nomes').its('um').should('be.eq', 'Joao')
+        cy.wrap(object2).its('nomes.um').should('be.eq', 'Joao')
+
+
+        //cy 
+        cy.title().its(length).should('have.length', '1')
+    })
+
+
+    it.only('Invoke', () => {
+        const duplicateValue = () => 'Ola mundo'
+        const object = {funcao: duplicateValue}
+
+        //estou acessando a propriedade para executa-la como função 
+        cy.wrap(object).invoke('funcao').should('be.eq', 'Ola mundo')
+
+        // passando parâmetros para a funcao pelo invoke
+        const potenciacao = (a,p) => a**p
+        const objectPo = {fn: potenciacao}
+        
+        // 10*10==100*10==1000
+        cy.wrap(objectPo).invoke('fn', 10,3).should('be.eq', 1000)
+        
+        //Pegando texto na página
+        cy.get('div > .shopping_cart > a > b').invoke('text').should('be.eq', 'Cart')
+
+        // digitando um valor no campo
+        cy.get('input[class="search_query form-control ac_input"]').invoke('val', 'Printed Chiffon')
+
+        // criar um elemento na tela 
+        cy.get('div > .shopping_cart > a > b').invoke('html', '<h2 style="color:red;"> HACKEADO </h2>')
+    })
 
 })
