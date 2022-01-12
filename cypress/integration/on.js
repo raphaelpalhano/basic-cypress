@@ -3,7 +3,7 @@ import * as url from "../fixtures/urls.json"
 /// <reference types="cypress" />
 
 
-describe('Utilizando Mock', () => {
+describe('Utilizando ON', () => {
     before('visit page', () => {
         cy.visit(url['automationPratice']);
     })
