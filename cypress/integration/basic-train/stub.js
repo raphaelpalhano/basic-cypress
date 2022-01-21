@@ -2,12 +2,10 @@
 
 import * as url from "../fixtures/urls.json"    
 
-
-
-
 describe('Utilizando ON', () => {
     before('visit page', () => {
         cy.visit(url['automationPratice']);
+        cy.login(user)
     })
 
     beforeEach('reload page', () => {

@@ -4,14 +4,17 @@
 //CALLBACK:
 const getSomething = print => {
     setTimeout(() => {
-        print('fim.')
+        print('meio.')
     },2000)
 };
 
 
 const sistema = () => {
     console.log('início')
-    getSomething(valor => { console.log('meio'), console.log(valor) })
+    getSomething(valor => { 
+        console.log(valor) 
+        console.log('fim')
+    })
    
 };
 
@@ -23,12 +26,17 @@ const sistema = () => {
 const pegarAlgo = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve('fim.')
+            resolve('Pessoas lindas')
         },2000)
     })
    
 };
 
+() =>{
+    pegarAlgo().then(valor =>{
+        console.log(valor)
+    })
+}
 
 const sistemaPro = () => {
     console.log('início')
